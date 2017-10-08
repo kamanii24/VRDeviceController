@@ -98,11 +98,7 @@ public class VRDeviceController : MonoBehaviour
 	
 	private void Update ()
 	{
-		// Backボタンで双眼モード解除
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			SetVR (false);
-		}
+		
 	}
 	#endregion // MonoBehaviour Methods
 
