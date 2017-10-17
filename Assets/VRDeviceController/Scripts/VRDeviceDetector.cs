@@ -8,8 +8,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VR;
 using UnityEngine.SceneManagement;
+#if UNITY_2017_2_OR_NEWER
+using UnityEngine.XR;
+#else
+using UnityEngine.VR;
+#endif
 
 public class VRDeviceDetector : MonoBehaviour
 {
@@ -38,10 +42,15 @@ public class VRDeviceDetector : MonoBehaviour
 		SceneManager.activeSceneChanged -= OnActiveSceneChange;	// コールバック解除
 		if (VRDeviceController.Instance == null)
 		{
-			// VRモードを無効にして通常画面にする
-			VRSettings.enabled = false;
+            // VRモードを無効にして通常画面にする
+#if UNITY_2017_2_OR_NEWER
+            XRSettings.enabled = false;
+            XRSettings.LoadDeviceByName("None");
+#else
+            VRSettings.enabled = false;
 			VRSettings.LoadDeviceByName("None");
-		}
+#endif
+        }
 		Destroy(gameObject);
 	}
 	#endregion // Member Methods
