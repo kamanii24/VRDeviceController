@@ -51,6 +51,14 @@ public class VRDeviceDetector : MonoBehaviour
 			VRSettings.LoadDeviceByName("None");
 #endif
         }
+		// アスペクト比をリセットする
+        Camera[] cams = (Camera[])GameObject.FindObjectsOfType(typeof(Camera));
+        foreach (Camera cam in cams)
+        {
+            cam.ResetAspect();
+        }
+
+		// VRDeviceDetector破棄
 		Destroy(gameObject);
 	}
 	#endregion // Member Methods

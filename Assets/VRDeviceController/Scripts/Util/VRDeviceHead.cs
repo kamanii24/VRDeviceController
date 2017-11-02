@@ -1,6 +1,6 @@
 ﻿// =================================
 //
-//	VRHead.cs
+//	VRDeviceHead.cs
 //	Created by Takuya Himeji
 //
 // =================================
@@ -14,7 +14,7 @@ using UnityEngine.XR;
 using UnityEngine.VR;
 #endif
 
-public class VRHead : MonoBehaviour
+public class VRDeviceHead : MonoBehaviour
 {
     #region MonoBehaviour Methods
     private void Start()

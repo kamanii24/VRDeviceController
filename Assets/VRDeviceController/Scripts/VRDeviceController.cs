@@ -39,7 +39,6 @@ public class VRDeviceController : MonoBehaviour
 
     #region Inspector Settings
     [SerializeField] private bool vrModeEnabled = true; // VRモードを設定する
-    [SerializeField] private Camera mainCamera = null;
     #endregion // Inspector Settings
 
 
@@ -125,10 +124,8 @@ public class VRDeviceController : MonoBehaviour
 #else
 		VRSettings.LoadDeviceByName(VR_DEVICE_NAME); 
 #endif
-        yield return null;              // 1フレーム待機
+        yield return null;          // 1フレーム待機
         VRModeEnabled = enabled;    // VRモードを有効
-
-        Debug.Log("XR : "+XRSettings.loadedDeviceName);
 
         // VRHead追加
         AddVRHead();
@@ -137,12 +134,12 @@ public class VRDeviceController : MonoBehaviour
     // シーン内のカメラにVRHeadコンポーネントを追加する
     private void AddVRHead()
     {
-        if (mainCamera == null)
+        Camera[] cams = (Camera[])GameObject.FindObjectsOfType(typeof(Camera));
+        foreach (Camera cam in cams)
         {
-            mainCamera = Camera.main;
+            cam.fieldOfView = FOV; // 視野を規定値に設定
+            cam.gameObject.AddComponent<VRDeviceHead>();
         }
-        mainCamera.fieldOfView = FOV; // 視野を規定値に設定
-        mainCamera.gameObject.AddComponent<VRHead>();
     }
 
 	// ロード中のデバイス名を取得
@@ -164,6 +161,12 @@ public class VRDeviceController : MonoBehaviour
 #else
         VRSettings.enabled = enabled;
 #endif
+        // アスペクト比をリセットする
+        Camera[] cams = (Camera[])GameObject.FindObjectsOfType(typeof(Camera));
+        foreach (Camera cam in cams)
+        {
+            cam.ResetAspect();
+        }
     }
 
 	// VR or XRSettingsの状態を取得
