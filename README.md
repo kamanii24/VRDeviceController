@@ -7,6 +7,7 @@
 PlayerSettingsでVirtualRealitySupportedにチェックを入れ、SDKsに**None**と**Cardboard**を追加します。
 この時**Cardboard**を上にした状態だと、起動時からVRモードが有効になった状態になります。
 起動直後にタッチ操作でUIをさせるシーンを想定している場合は**None**が上、**Cardboard**を下に設定してください。
+![sdks](https://imgur.com/a/8S4f1 "sdks")
 
 #### ヘッドトラッキングを有効にする
 ヘッドトラッキングを有効化したいシーン内にPrefabs/VRDeviceControllerを追加します。
