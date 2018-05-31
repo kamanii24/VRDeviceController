@@ -45,6 +45,10 @@ public class VRDeviceController : MonoBehaviour
     #region Member Field
     private static readonly string VR_DEVICE_NAME = "cardboard"; // Cardboardデバイス名
     private static readonly int	FOV = 60; // カメラの視野の規定値
+
+    // VR切り替えの完了通知用
+    public delegate void OnVRReady(bool vrModeEnabled);
+    public OnVRReady onVRReady;
     #endregion // Member Field
 
 
@@ -121,6 +125,10 @@ public class VRDeviceController : MonoBehaviour
 
         // VRHead追加
         AddVRHead();
+
+        // 準備完了
+        if (onVRReady != null)
+            onVRReady(vrModeEnabled);
     }
 
     // シーン内のカメラにVRHeadコンポーネントを追加する
