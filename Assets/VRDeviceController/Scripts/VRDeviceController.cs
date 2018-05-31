@@ -66,11 +66,7 @@ public class VRDeviceController : MonoBehaviour
 		// 60FPSに固定
 		Application.targetFrameRate = 60;
 		// 対応デバイスを取得
-#if UNITY_2017_2_OR_NEWER
         string[] supportedDevices = XRSettings.supportedDevices;
-#else
-        string[] supportedDevices = VRSettings.supportedDevices;
-#endif
 
         // Cardboardデバイスが存在するかどうか
         bool isValid = false;
@@ -119,11 +115,7 @@ public class VRDeviceController : MonoBehaviour
     private IEnumerator LoadDevice(bool enabled)
     {
 		// 指定のデバイスを読み込む
-#if UNITY_2017_2_OR_NEWER
         XRSettings.LoadDeviceByName(VR_DEVICE_NAME);
-#else
-		VRSettings.LoadDeviceByName(VR_DEVICE_NAME); 
-#endif
         yield return null;          // 1フレーム待機
         VRModeEnabled = enabled;    // VRモードを有効
 
@@ -145,22 +137,14 @@ public class VRDeviceController : MonoBehaviour
 	// ロード中のデバイス名を取得
 	private string GetLoadedDeviceName()
 	{
-#if UNITY_2017_2_OR_NEWER
         return XRSettings.loadedDeviceName;
-#else
-        return VRSettings.loadedDeviceName;
-#endif
     }
 
     // VR or XRSettingsの状態を更新
     private void SetVREnabled(bool enabled)
 	{
 		vrModeEnabled = enabled;
-#if UNITY_2017_2_OR_NEWER
         XRSettings.enabled = enabled;
-#else
-        VRSettings.enabled = enabled;
-#endif
         // アスペクト比をリセットする
         Camera[] cams = (Camera[])GameObject.FindObjectsOfType(typeof(Camera));
         foreach (Camera cam in cams)
@@ -172,11 +156,7 @@ public class VRDeviceController : MonoBehaviour
 	// VR or XRSettingsの状態を取得
 	private bool GetVREnabled()
 	{
-#if UNITY_2017_2_OR_NEWER
         return XRSettings.enabled;
-#else
-        return VRSettings.enabled;
-#endif
     }
     #endregion // Member Methods
 }

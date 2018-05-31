@@ -24,19 +24,11 @@ public class VRDeviceHead : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_2017_2_OR_NEWER
         if (!XRSettings.enabled)
         {
             transform.localPosition = InputTracking.GetLocalPosition(XRNode.CenterEye);
             transform.localRotation = InputTracking.GetLocalRotation(XRNode.CenterEye);
         }
-#else
-		if (!VRSettings.enabled)
-		{
-			transform.localPosition = InputTracking.GetLocalPosition(VRNode.CenterEye);
-			transform.localRotation = InputTracking.GetLocalRotation(VRNode.CenterEye);
-		}
-#endif
     }
     #endregion // MonoBehaviour Methods
 }
